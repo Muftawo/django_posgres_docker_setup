@@ -1,0 +1,42 @@
+# create project intialization files
+1. requirements.txt 
+2. Dockerfile
+3. docker-compose.yml
+
+# split dockerfile from source code
+
+
+
+
+# create project 
+1. docker-compose run web django-admin startproject projectname .
+
+2. run ls to view dir content
+
+
+# PROJECT SETTINGS
+3. open projectname/settings.py and change the database settings to postgres
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432'
+        
+    }
+}
+
+4. In settings.py add '0.0.0.0' to ALLOWED HOST list
+
+# database migrations 
+5. docker-compose run web python manage.py makemigrations
+
+6. docker-compose run web python manage.py migrate
+
+# Start project
+7. docker-compose up #to start server
+
+8. docker-compose down #to kill server

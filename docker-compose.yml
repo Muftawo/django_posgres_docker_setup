@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  db:
+    container_name: project_db
+    image: postgres:13
+    volumes:
+      - ./data/db/:/var/lib/postgresql/data
+
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    container_name: project_name
+    build: 
+      context: .
+      target: debug
+    
+    #working_dir: /work      #comment out for build.target:prod
+    #entrypoint: /bin/sh     #comment out for build.target:prod
+    #stdin_open: true        #comment out for build.target:prod
+    #tty: true               #comment out for build.target:prod
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      
+
+
+
